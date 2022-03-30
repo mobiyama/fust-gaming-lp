@@ -6,4 +6,13 @@ export type Info = {
   };
   name: string;
   description: string;
+  categories: {
+    name: string;
+    path: string;
+    titleImg: {
+      url: string;
+      width: number;
+      height: number;
+    };
+  }[];
 };
