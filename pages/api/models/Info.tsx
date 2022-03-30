@@ -1,4 +1,4 @@
-export type ApexInfo = {
+export type Info = {
   logo: {
     url: string;
     width: number;

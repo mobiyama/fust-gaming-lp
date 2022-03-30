@@ -1,11 +1,10 @@
 import { MicroCMSDate, MicroCMSListResponse } from 'microcms-js-sdk';
 import { Top } from '../components/templates/Top';
-import { cmsApex } from '../libs/cms/index';
-import { ApexInfo, ApexProfile } from './api/models/Apex';
+import { cmsApex } from '../libs/cms';
+import { Info } from './api/models/info';
 
 export type TopProps = {
-  info: ApexInfo & MicroCMSDate;
-  profiles: MicroCMSListResponse<ApexProfile>;
+  info: Info & MicroCMSDate;
 };
 
 const Home = (props: TopProps) => {
@@ -13,14 +12,12 @@ const Home = (props: TopProps) => {
 };
 
 export const getServerSideProps = async () => {
-  const [ info, profiles ] = await Promise.all([
-    cmsApex.getObject<ApexInfo>({ endpoint: 'info' }),
-    cmsApex.getList<ApexProfile>({ endpoint: 'profile' }),
-  ])
+  const [info] = await Promise.all([
+    cmsApex.getObject<Info>({ endpoint: 'info' }),
+  ]);
   return {
     props: {
       info,
-      profiles,
     },
   };
 };
